@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 const UpdateMovieForm = props => {
-  
+  const movieId = props.match.params.id
+  console.log('UpdateMovieForm movieId: ', movieId)
   console.log('UpdateMovieForm props: ', props)
 
   const [updatedMovieData, setUpdatedMovieDate] = useState({
@@ -12,6 +14,16 @@ const UpdateMovieForm = props => {
     stars: []
   })
   
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/movies/${movieId}`)
+      .then(result => {
+        console.log('✅ axios get by movie id: ', result.data)
+        setUpdatedMovieDate(result.data)
+      })
+      .catch(error => console.log("❌ axios 'get' by movie id: ", error))
+  }, [movieId])
+
   console.log('UpdateMovieForm updatedMovieData: ', updatedMovieData)
 
   const onchangeHandler = event => {
