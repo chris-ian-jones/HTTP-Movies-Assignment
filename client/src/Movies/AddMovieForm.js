@@ -52,22 +52,22 @@ const AddMovieForm = props => {
       <div className="movie-card">
         <Form onSubmit={onSubmitHandler}>
           <Form.Field>
-            <Input name='title' placeholder={newMovieData.title} value={newMovieData.title} onChange={onChangeHandler}/>
+            <Input name='title' value={newMovieData.title} onChange={onChangeHandler}/>
             <Label pointing>Please enter new title</Label>
           </Form.Field>
           <Divider />
           <Form.Field>
-          <Input name='director' placeholder={newMovieData.director} value={newMovieData.director} onChange={onChangeHandler} />
+          <Input name='director' value={newMovieData.director} onChange={onChangeHandler} />
             <Label pointing>Please enter new director</Label>
           </Form.Field>
           <Divider />
           <Form.Field>
-          <Input name='metascore' placeholder={newMovieData.metascore} value={newMovieData.metascore} onChange={onChangeHandler} />
+          <Input name='metascore' value={newMovieData.metascore} onChange={onChangeHandler} />
             <Label pointing>Please enter new metascore</Label>
           </Form.Field>
           <Divider />
           <Form.Field>
-          <Input name='stars' placeholder={newMovieData.stars} value={newMovieData.stars} onChange={onChangeHandler} />
+          <Input name='stars' value={newMovieData.stars} onChange={onChangeHandler} />
             <Label pointing>Please enter new stars seperated by a comma</Label>
           </Form.Field>
           <Divider />
