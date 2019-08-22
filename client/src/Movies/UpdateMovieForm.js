@@ -35,25 +35,30 @@ const UpdateMovieForm = props => {
 
   console.log('UpdateMovieForm updatedMovieData: ', updatedMovieData)
 
-  const onchangeHandler = event => {
+  const onChangeHandler = event => {
     setUpdatedMovieDate({
       ...updatedMovieData, 
       [event.target.name]: event.target.value
     })
   }
 
+  const onSubmitHandler = event => {
+    event.preventDefault()
+    // axios.
+  }
+
   return (
-      <StyledForm>
+      <StyledForm onSubmit={onSubmitHandler}>
         <label>Title</label>
-        <input name='title' placeholder={updatedMovieData.title} value={updatedMovieData.title} onChange={onchangeHandler}/>
+        <input name='title' placeholder={updatedMovieData.title} value={updatedMovieData.title} onChange={onChangeHandler}/>
         <label>Director</label>
-        <input name='director' placeholder={updatedMovieData.director} value={updatedMovieData.director} onChange={onchangeHandler} />
+        <input name='director' placeholder={updatedMovieData.director} value={updatedMovieData.director} onChange={onChangeHandler} />
         <label>Metascore</label>
-        <input name='metascore' placeholder={updatedMovieData.metascore} value={updatedMovieData.metascore} onChange={onchangeHandler} />
+        <input name='metascore' placeholder={updatedMovieData.metascore} value={updatedMovieData.metascore} onChange={onChangeHandler} />
         {/* Todo stars array input */}
         {/* <label>Stars</label> */}
         {/* <input name='stars' placeholder={updatedMovieData.stars} value={updatedMovieData.title} /> */}
-        <button>Update</button>
+        <button onClick={onSubmitHandler}>Update</button>
       </StyledForm>
   )
 }
