@@ -16,10 +16,10 @@ const UpdateMovieForm = props => {
   console.log('UpdateMovieForm props: ', props)
 
   const [updatedMovieData, setUpdatedMovieDate] = useState({
-    id: 'test',
-    title: 'test',
-    director: 'test',
-    metascore: 'test',
+    id: '',
+    title: '',
+    director: '',
+    metascore: '',
     stars: []
   })
   
@@ -46,7 +46,17 @@ const UpdateMovieForm = props => {
     event.preventDefault()
     axios
     .put(`http://localhost:5000/api/movies/${movieId}`, updatedMovieData)
-    .then(result => console.log("✅ axios 'put by movie id: ", result))
+    .then(result => {
+      console.log("✅ axios 'put by movie id: ", result)
+      setUpdatedMovieDate({
+        id: '',
+        title: '',
+        director: '',
+        metascore: '',
+        stars: []
+      })
+      props.history.push('/')
+    })
     .catch(error => console.log("❌ axios 'put' by movie id: ", error))
   }
 
