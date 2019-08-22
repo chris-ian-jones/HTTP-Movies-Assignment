@@ -1,14 +1,15 @@
 import React from "react";
 import axios from "axios";
-import MovieCard from "./MovieCard";
 import { Button } from 'semantic-ui-react'
+
+import MovieCard from "./MovieCard";
 
 export default class Movie extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       movie: null
-    };
+    }
   }
 
   componentDidMount() {
@@ -26,12 +27,12 @@ export default class Movie extends React.Component {
       .get(`http://localhost:5000/api/movies/${id}`)
       .then(res => this.setState({ movie: res.data }))
       .catch(err => console.log(err.response));
-  };
+  }
 
   saveMovie = () => {
     const addToSavedList = this.props.addToSavedList;
     addToSavedList(this.state.movie);
-  };
+  }
 
   editHandler = () => {
     this.props.history.push(`/update-movie/${this.props.match.params.id}`)
@@ -62,6 +63,6 @@ export default class Movie extends React.Component {
           Save
         </div>
       </div>
-    );
+    )
   }
 }

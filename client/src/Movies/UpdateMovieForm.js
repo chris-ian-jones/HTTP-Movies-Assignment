@@ -6,10 +6,8 @@ import 'semantic-ui-css/semantic.min.css'
 
 const UpdateMovieForm = props => {
   const movieId = props.match.params.id
-  console.log('UpdateMovieForm movieId: ', movieId)
-  console.log('UpdateMovieForm props: ', props)
 
-  const [currentMovieData, setCurrentMovieDate] = useState({
+  const [currentMovieData, setCurrentMovieData] = useState({
     id: '',
     title: '',
     director: '',
@@ -30,13 +28,11 @@ const UpdateMovieForm = props => {
       .get(`http://localhost:5000/api/movies/${movieId}`)
       .then(result => {
         console.log("✅ axios 'get' by movie id: ", result.data)
-        setCurrentMovieDate(result.data)
+        setCurrentMovieData(result.data)
         setUpdatedMovieDate(result.data)
       })
       .catch(error => console.log("❌ axios 'get' by movie id: ", error))
   }, [movieId])
-
-  console.log('UpdateMovieForm updatedMovieData: ', updatedMovieData)
 
   const onChangeHandler = event => {
     setUpdatedMovieDate({
@@ -47,13 +43,18 @@ const UpdateMovieForm = props => {
 
   const onSubmitHandler = event => {
     event.preventDefault()
+
     const tempUpdatedMovieData = {
       id: updatedMovieData.id,
       title: updatedMovieData.title,
       director: updatedMovieData.director,
       metascore: updatedMovieData.metascore,
+      // conditional statement to check if the stars data has been updated, 
+      // if it has, then convert the string of names into an array of names for the put request,
+      // otherwise update movie data with original array of stars
       stars: updatedMovieData.stars === currentMovieData.stars ? currentMovieData.stars : updatedMovieData.stars.split(",")
     }
+    
     axios
     .put(`http://localhost:5000/api/movies/${movieId}`, tempUpdatedMovieData)
     .then(result => {
