@@ -27,7 +27,7 @@ const UpdateMovieForm = props => {
     axios
       .get(`http://localhost:5000/api/movies/${movieId}`)
       .then(result => {
-        console.log('✅ axios get by movie id: ', result.data)
+        console.log("✅ axios 'get' by movie id: ", result.data)
         setUpdatedMovieDate(result.data)
       })
       .catch(error => console.log("❌ axios 'get' by movie id: ", error))
@@ -44,7 +44,10 @@ const UpdateMovieForm = props => {
 
   const onSubmitHandler = event => {
     event.preventDefault()
-    // axios.
+    axios
+    .put(`http://localhost:5000/api/movies/${movieId}`, updatedMovieData)
+    .then(result => console.log("✅ axios 'put by movie id: ", result))
+    .catch(error => console.log("❌ axios 'put' by movie id: ", error))
   }
 
   return (
