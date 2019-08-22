@@ -14,7 +14,6 @@ const App = () => {
 
   return (
     <>
-      <h1>Test title</h1>
       <SavedList list={savedList} />
       <Route exact path="/" component={MovieList} />
       <Route

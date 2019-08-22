@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
 import MovieCard from "./MovieCard";
+import { Button } from 'semantic-ui-react'
+
 export default class Movie extends React.Component {
   constructor(props) {
     super(props);
@@ -54,8 +56,8 @@ export default class Movie extends React.Component {
     return (
       <div className="save-wrapper">
         <MovieCard movie={this.state.movie} />
-        <button onClick={this.editHandler}>Edit</button>
-        <button onClick={this.deleteHandler}>Delete</button>
+        <Button onClick={this.editHandler} color='blue'>Edit</Button>
+        <Button onClick={this.deleteHandler} color='red'>Delete</Button>
         <div className="save-button" onClick={this.saveMovie}>
           Save
         </div>

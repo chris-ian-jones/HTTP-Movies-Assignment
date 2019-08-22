@@ -1,14 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import styled from 'styled-components'
-
-const StyledForm = styled.form`
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;;
-`
+import { Input, Label, Button, Form, Divider } from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css'
 
 const UpdateMovieForm = props => {
   const movieId = props.match.params.id
@@ -58,7 +52,7 @@ const UpdateMovieForm = props => {
       title: updatedMovieData.title,
       director: updatedMovieData.director,
       metascore: updatedMovieData.metascore,
-      stars: updatedMovieData.stars.split(",")
+      stars: updatedMovieData.stars === currentMovieData.stars ? currentMovieData.stars : updatedMovieData.stars.split(",")
     }
     axios
     .put(`http://localhost:5000/api/movies/${movieId}`, tempUpdatedMovieData)
@@ -95,17 +89,29 @@ const UpdateMovieForm = props => {
         ))}
       </div>
       <div className="movie-card">
-        <StyledForm onSubmit={onSubmitHandler}>
-          <label>Title</label>
-          <input name='title' placeholder={updatedMovieData.title} value={updatedMovieData.title} onChange={onChangeHandler}/>
-          <label>Director</label>
-          <input name='director' placeholder={updatedMovieData.director} value={updatedMovieData.director} onChange={onChangeHandler} />
-          <label>Metascore</label>
-          <input name='metascore' placeholder={updatedMovieData.metascore} value={updatedMovieData.metascore} onChange={onChangeHandler} />
-          <label>Stars</label>
-          <input name='stars' placeholder={updatedMovieData.stars} value={updatedMovieData.stars} onChange={onChangeHandler} />
-          <button onClick={onSubmitHandler}>Update</button>
-        </StyledForm>
+        <Form onSubmit={onSubmitHandler}>
+          <Form.Field>
+            <Input name='title' placeholder={updatedMovieData.title} value={updatedMovieData.title} onChange={onChangeHandler}/>
+            <Label pointing>Please enter new title</Label>
+          </Form.Field>
+          <Divider />
+          <Form.Field>
+          <Input name='director' placeholder={updatedMovieData.director} value={updatedMovieData.director} onChange={onChangeHandler} />
+            <Label pointing>Please enter new director</Label>
+          </Form.Field>
+          <Divider />
+          <Form.Field>
+          <Input name='metascore' placeholder={updatedMovieData.metascore} value={updatedMovieData.metascore} onChange={onChangeHandler} />
+            <Label pointing>Please enter new metascore</Label>
+          </Form.Field>
+          <Divider />
+          <Form.Field>
+          <Input name='stars' placeholder={updatedMovieData.stars} value={updatedMovieData.stars} onChange={onChangeHandler} />
+            <Label pointing>Please enter new stars</Label>
+          </Form.Field>
+          <Divider />
+          <Button onClick={onSubmitHandler} color='green'>Update</Button>
+        </Form>
       </div>
     </>
   )
