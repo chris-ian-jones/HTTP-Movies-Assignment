@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import styled from 'styled-components'
+
+const StyledForm = styled.form`
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;;
+`
 
 const UpdateMovieForm = props => {
   const movieId = props.match.params.id
@@ -34,14 +43,18 @@ const UpdateMovieForm = props => {
   }
 
   return (
-    <form>
-      <input name='title' placeholder={updatedMovieData.title} value={updatedMovieData.title} onChange={onchangeHandler}/>
-      <input name='director' placeholder={updatedMovieData.director} value={updatedMovieData.director} onChange={onchangeHandler} />
-      <input name='metascore' placeholder={updatedMovieData.metascore} value={updatedMovieData.metascore} onChange={onchangeHandler} />
-      {/* Todo stars array input */}
-      {/* <input name='title' placeholder={updatedMovieData.title} value={updatedMovieData.title} /> */}
-      <button>Update</button>
-    </form>
+      <StyledForm>
+        <label>Title</label>
+        <input name='title' placeholder={updatedMovieData.title} value={updatedMovieData.title} onChange={onchangeHandler}/>
+        <label>Director</label>
+        <input name='director' placeholder={updatedMovieData.director} value={updatedMovieData.director} onChange={onchangeHandler} />
+        <label>Metascore</label>
+        <input name='metascore' placeholder={updatedMovieData.metascore} value={updatedMovieData.metascore} onChange={onchangeHandler} />
+        {/* Todo stars array input */}
+        {/* <label>Stars</label> */}
+        {/* <input name='stars' placeholder={updatedMovieData.stars} value={updatedMovieData.title} /> */}
+        <button>Update</button>
+      </StyledForm>
   )
 }
 
