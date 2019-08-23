@@ -1,12 +1,15 @@
 import React from "react";
 import axios from "axios";
+import { Button } from 'semantic-ui-react'
+
 import MovieCard from "./MovieCard";
+
 export default class Movie extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       movie: null
-    };
+    }
   }
 
   componentDidMount() {
@@ -24,12 +27,27 @@ export default class Movie extends React.Component {
       .get(`http://localhost:5000/api/movies/${id}`)
       .then(res => this.setState({ movie: res.data }))
       .catch(err => console.log(err.response));
-  };
+  }
 
   saveMovie = () => {
     const addToSavedList = this.props.addToSavedList;
     addToSavedList(this.state.movie);
-  };
+  }
+
+  editHandler = () => {
+    this.props.history.push(`/update-movie/${this.props.match.params.id}`)
+  }
+
+  deleteHandler = () => {
+    const movieIdToDelete = this.props.match.params.id
+    axios
+      .delete(`http://localhost:5000/api/movies/${movieIdToDelete}`, movieIdToDelete)
+      .then(result => {
+        console.log("✅ axios 'delete' by movie id: ", result)
+        this.props.history.push(`/`)
+      })
+      .catch(error => console.log("❌ axios 'delete' by movie id: ", error))
+  }
 
   render() {
     if (!this.state.movie) {
@@ -39,10 +57,12 @@ export default class Movie extends React.Component {
     return (
       <div className="save-wrapper">
         <MovieCard movie={this.state.movie} />
+        <Button onClick={this.editHandler} color='blue'>Edit</Button>
+        <Button onClick={this.deleteHandler} color='red'>Delete</Button>
         <div className="save-button" onClick={this.saveMovie}>
           Save
         </div>
       </div>
-    );
+    )
   }
 }
